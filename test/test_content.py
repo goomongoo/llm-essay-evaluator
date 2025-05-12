@@ -3,7 +3,7 @@ import json
 import random
 from glob import glob
 
-from config import DATASET_DIR, CONTENT_CRITERIA
+from config import DATASET_DIR
 from evaluators.content import evaluate_content
 from scipy.stats import pearsonr, spearmanr
 
@@ -31,14 +31,12 @@ def print_and_evaluate_total_content_scores(limit: int = 10, randomize: bool = T
         paragraphs = data["paragraph"]
         llm_input = "\n".join([p["paragraph_txt"] for p in paragraphs])
 
-        gt_scores = data["score"]["essay_scoreT_detail"]["essay_scoreT_cont"]
-        llm_result = evaluate_content({
+        # 이미 round된 float 값으로 들어오는 점수들
+        human_total = data["score"]["essay_scoreT_detail"]["essay_scoreT_cont"]
+        llm_total = evaluate_content({
             "prompt": prompt,
             "input_text": llm_input
         })
-
-        human_total = round(sum(gt_scores), 2)
-        llm_total = round(sum(llm_result[criterion] for criterion in CONTENT_CRITERIA), 2)
 
         human_total_scores.append(human_total)
         llm_total_scores.append(llm_total)
@@ -62,4 +60,4 @@ def print_and_evaluate_total_content_scores(limit: int = 10, randomize: bool = T
 
 
 if __name__ == "__main__":
-    print_and_evaluate_total_content_scores(limit=50, randomize=True)
+    print_and_evaluate_total_content_scores(limit=10, randomize=True)

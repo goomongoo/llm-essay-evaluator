@@ -40,14 +40,10 @@ Chain-of-Thought Procedure
    • List key observations (bullet points are fine).  
    • Decide on a provisional score (0–3).  
 3. **Double-check consistency** of all scores with the rubric and the special rule if single-paragraph.  
-4. **Output the final scores ONLY** in the exact JSON format below.  
-   Do not include your reasoning in the JSON.
+4. **Output only the total score** (sum of the three criterion scores).  
+   Do not include your reasoning or JSON formatting.
 
 Output Format
 -------------
-[
-    {{"criterion": "Clarity of the Topic", "score": <0–3>}},
-    {{"criterion": "Specificity of Explanations", "score": <0–3>}},
-    {{"criterion": "Understanding of the Prompt", "score": <0–3>}}
-]
+Just print a single integer from 0 to 9.
 """

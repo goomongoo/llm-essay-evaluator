@@ -3,7 +3,7 @@
 from collections import Counter
 
 def get_expected_score(sampled_scores: list[int]):
-    score_range = list(range(4))
+    score_range = list(range(10))
     count = Counter(sampled_scores)
     total = sum(count.values())
 
