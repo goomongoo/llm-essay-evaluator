@@ -157,18 +157,29 @@ parser.add_argument('--option', help=' : generation or summary')
 parser.add_argument('--length', help=' : maximum number of characters (100~500)', type=int)
 args = parser.parse_args()
 
+import sys
+
 def main(_argv, _args):
-    if _args.length < 100 or _args.length > 500:
-        print('--length는 100에서 500 사이의 자연수여야 합니다.')
+    if not hasattr(_args, 'option') or _args.option is None:
+        print('--option 인자가 필요합니다. (generation 또는 summary)')
+        sys.exit(1)
+
+    if not hasattr(_args, 'length') or _args.length is None:
+        print('--length 인자가 필요합니다. (100에서 500 사이의 자연수)')
+        sys.exit(1)
+
+    if int(_args.length) < 100 or int(_args.length) > 1000:
+        print('--length는 100에서 1000 사이의 자연수여야 합니다.')
         sys.exit(1)
 
     if _args.option == 'generation':
-        generation_evaluator(_args.length)
+        generation_evaluator(int(_args.length))
     elif _args.option == 'summary':
-        summarization_evaluator(_args.length)
+        summarization_evaluator(int(_args.length))
     else:
         print('--option은 generation 또는 summary 중 하나여야 합니다.')
         sys.exit(1)
+
 
 if __name__ == "__main__":
     argv = sys.argv
