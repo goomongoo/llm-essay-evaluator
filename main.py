@@ -165,7 +165,7 @@ def main(_argv, _args):
         sys.exit(1)
 
     if not hasattr(_args, 'length') or _args.length is None:
-        print('--length 인자가 필요합니다. (100에서 500 사이의 자연수)')
+        print('--length 인자가 필요합니다. (100에서 1000 사이의 자연수)')
         sys.exit(1)
 
     if int(_args.length) < 100 or int(_args.length) > 1000:
