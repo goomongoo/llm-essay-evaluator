@@ -64,7 +64,7 @@ def summarize_essay_feedback(context: dict):
 
 def generation_evaluator(max_length: int):
     essay_prompt = input("에세이 프롬프트를 입력하세요: ")
-    print("\n사용할 모델 번호를 선택하세요:")
+    print("\n에세이 생성에 사용할 모델 번호를 선택하세요:")
     for idx, model_name in enumerate(MODELS):
         print(f"  {idx}. {model_name}")
     model_idx = int(input("모델 번호 입력: "))
@@ -106,7 +106,7 @@ def generation_evaluator(max_length: int):
 
 def summarization_evaluator(max_length: int):
     essay_original = input("에세이 원문을 입력하세요: ")
-    print("\n사용할 모델 번호를 선택하세요:")
+    print("\n에세이 요약에 사용할 모델 번호를 선택하세요:")
     for idx, model_name in enumerate(MODELS):
         print(f"  {idx}. {model_name}")
     model_idx = int(input("모델 번호 입력: "))
