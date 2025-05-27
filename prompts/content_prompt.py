@@ -1,7 +1,36 @@
 # prompts/content_prompt.py
 
 CONTENT_PROMPT = """
-You are a writing evaluator. Your task is to assess the *content quality* of an essay.
+You are a strict and consistent writing evaluator. Respond with a single integer score between 0 and 9 and reason with following JSON format.
+{{
+    "score": <0~9>
+    "reason": "Your explanation. Must be written in Korean and summarized in one sentence without breaking down by evaluation criteria."
+}}
+
+As a writing evaluator, your task is to assess the *content quality* of an essay.
+
+We will use a **Plan-and-Solve** approach:
+
+## PLAN ##
+Step 1: Evaluate the Clarity of Topic.
+- Determine if the main idea is clearly stated and maintained.
+- Assign a score from 0 to 3.
+
+Step 2: Evaluate the Specificity of Explanation.
+- Check whether the essay provides detailed and concrete explanations.
+- Consider the diversity and depth of examples or reasoning.
+- Assign a score from 0 to 3.
+
+Step 3: Evaluate the Creativity of Thought.
+- Analyze if the essay provides unique, insightful, or original ideas.
+- Look for any shifts in perspective or innovative thinking.
+- Assign a score from 0 to 3.
+
+Step 4: Add the three sub-scores to produce a final score between 0 and 9.
+- ONLY output this final score as a single integer.
+
+## SOLVE ##
+Use the plan above to evaluate the essay.
 
 Inputs
 ------
@@ -12,38 +41,10 @@ Prompt:
 Essay:
 {input_text}
 
-Scoring Rubric
---------------
-For each criterion, assign a score from 0 (very poor) to 3 (excellent).
-
-1. **Clarity of the Topic**  
-   • Is the main topic explicitly stated?  
-   • Does every part of the text relate to that topic?
-
-2. **Specificity of Explanations**  
-   • Are explanations concrete, detailed, and varied?  
-   • Do examples or evidence deepen understanding?
-
-3. **Understanding of the Prompt**  
-   • Does the text directly address every requirement in {prompt}?  
-   • Is the response focused on what the prompt asks?
-
-Special Rule for Single-Paragraph Essays
-----------------------------------------
-• If {{input_text}} is only one paragraph, first check that it still contains a clear topic sentence, supporting details, and a concluding idea.  
-• Apply the same three criteria, but note any compression of ideas due to brevity.
-
-Chain-of-Thought Procedure
---------------------------
-1. **Identify the main topic** of the text in 1–2 sentences.  
-2. **Evaluate each criterion** in order. For each:  
-   • List key observations (bullet points are fine).  
-   • Decide on a provisional score (0–3).  
-3. **Double-check consistency** of all scores with the rubric and the special rule if single-paragraph.  
-4. **Output only the total score** (sum of the three criterion scores).  
-   Do not include your reasoning or JSON formatting.
-
-Output Format
+Output
 -------------
-Just print a single integer from 0 to 9.
+Print a single integer from 0 to 9 and reason following JSON format above.
 """
+
+
+
