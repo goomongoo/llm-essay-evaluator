@@ -25,7 +25,7 @@ llm = ChatOpenAI(
 DATASET_DIR = os.environ.get("ESSAY_DATASET_DIR")
 
 def evaluate_coherence_test(context: dict):
-    prompt = ChatPromptTemplate.from_template(coherence_prompt.BASE)
+    prompt = ChatPromptTemplate.from_template(coherence_prompt.BASE_ZEROSHOT)
     chain = prompt | llm
 
     repeat_count = config.REPEAT_EVAL_COUNT

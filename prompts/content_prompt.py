@@ -43,7 +43,7 @@ Essay:
 
 Output
 -------------
-Print a single integer from 0 to 9 and reason following JSON format above.
+Print result following JSON format above.
 """
 
 

@@ -22,7 +22,7 @@ llm = ChatOpenAI(
 FILE_PATH = os.environ.get("HALLU_DATASET_PATH")
 
 def evaluate_hallucination_test(context: dict):
-    prompt = ChatPromptTemplate.from_template(hallucination_prompt.BASE)
+    prompt = ChatPromptTemplate.from_template(hallucination_prompt.PLAN_SOLVE)
     chain = prompt | llm
 
     try:

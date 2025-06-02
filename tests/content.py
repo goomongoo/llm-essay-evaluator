@@ -25,7 +25,7 @@ llm = ChatOpenAI(
 DATASET_DIR = os.environ.get("ESSAY_DATASET_DIR")
 
 def evaluate_content_test(context: dict):
-    prompt = ChatPromptTemplate.from_template(content_prompt.BASE)
+    prompt = ChatPromptTemplate.from_template(content_prompt.PLAN_SOLVE_ONESHOT)
     chain = prompt | llm
 
     repeat_count = config.REPEAT_EVAL_COUNT
