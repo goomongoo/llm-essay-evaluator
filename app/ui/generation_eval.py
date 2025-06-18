@@ -1,4 +1,5 @@
 # app/ui/generation_eval.py
+
 import streamlit as st
 import sys
 import os
@@ -7,13 +8,12 @@ from fontTools.varLib.cff import merge_region_fonts
 from langchain_core.runnables import RunnableMap
 from datetime import datetime
 
-# Calculate the project root directory.
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-from main import generate_essay, MODELS
+from llm_tasks import generate_essay, MODELS
 from evaluators.content import evaluate_content
 from evaluators.coherence import evaluate_coherence
 from evaluators.fluency import evaluate_fluency
@@ -74,7 +74,6 @@ def generation_eval_page():
             st.markdown("#### 평가 결과")
             for metric, detail in results.items():
                 st.markdown(f"##### {metric.upper()}")
-                # 할루시네이션 평가 결과는 특별한 형식으로 표시
                 if metric=="length":
                     if detail['score']:
                         st.write("✅ 만족")
@@ -100,4 +99,4 @@ def generation_eval_page():
                 "generated_text": essay,
                 "evaluation_results": results,
             }
-            st.session_state.history.insert(0, history_entry) # Insert at the beginning to show newest first
+            st.session_state.history.insert(0, history_entry)

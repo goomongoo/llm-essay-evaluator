@@ -11,7 +11,7 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-from main import summarize_essay, MODELS
+from llm_tasks import summarize_essay, MODELS
 from evaluators.content import evaluate_content
 from evaluators.coherence import evaluate_coherence
 from evaluators.fluency import evaluate_fluency
@@ -76,7 +76,6 @@ def summary_eval_page():
             st.markdown("#### 평가 결과")
             for metric, detail in results.items():
                 st.markdown(f"##### {metric.upper()}")
-                # 할루시네이션 평가 결과는 특별한 형식으로 표시
                 if metric=="length":
                     if detail['score']:
                         st.write("✅ 만족")
@@ -92,7 +91,6 @@ def summary_eval_page():
                 st.write(f"사유: {detail['reason']}")
                 st.markdown("---")
 
-            # Save to history
             history_entry = {
                 "type": "summary",
                 "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -102,4 +100,4 @@ def summary_eval_page():
                 "generated_text": summary,
                 "evaluation_results": results,
             }
-            st.session_state.history.insert(0, history_entry) # Insert at the beginning
+            st.session_state.history.insert(0, history_entry)

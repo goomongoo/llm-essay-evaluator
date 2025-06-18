@@ -1,6 +1,4 @@
-# main.py
-
-# Evaluator based on CLI, not streamlit
+# llm_tasks.py
 
 import sys
 import argparse

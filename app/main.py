@@ -13,6 +13,9 @@ def main_page():
     st.set_page_config(page_title="에세이 생성·요약 평가 시스템")
     st.title(f"에세이 생성·요약 평가 시스템")
 
+    if 'history' not in st.session_state:
+        st.session_state.history = []
+
     st.sidebar.markdown("## 📋 메뉴")
     if st.sidebar.button("에세이 생성 및 평가"):
         st.session_state["page"] = "generation_eval"
